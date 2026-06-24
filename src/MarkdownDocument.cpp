@@ -91,7 +91,7 @@ bool MarkdownDocument::parseFromFile(const std::string& filename)
 
     if (!isTextFile(filename))
     {
-        std::cout << "Грешка: Файлъt '" << filename << "' не съществува или не е текстов.\n";
+        std::cout << "Грешка: Файлът '" << filename << "' не съществува или не е текстов.\n";
         return false;
     }
 
