@@ -6,7 +6,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <utility>
 
 void MarkdownDocument::initializeRules()
 {
@@ -64,9 +63,11 @@ MarkdownDocument::MarkdownDocument(const MarkdownDocument& other)
     copyFrom(other);
 }
 
+// Поправка: без std::move (изисква <utility>, която е забранена)
+// Използваме copy + изчистване на other
 MarkdownDocument::MarkdownDocument(MarkdownDocument&& other) noexcept
     : blocks(other.blocks),
-      errors(std::move(other.errors)),
+      errors(other.errors),
       total_lines_read(other.total_lines_read)
 {
     other.blocks.clear();
@@ -90,7 +91,7 @@ bool MarkdownDocument::parseFromFile(const std::string& filename)
 
     if (!isTextFile(filename))
     {
-        std::cout << "Грешка: Файлът '" << filename << "' не съществува или не е текстов.\n";
+        std::cout << "Грешка: Файлъt '" << filename << "' не съществува или не е текстов.\n";
         return false;
     }
 
